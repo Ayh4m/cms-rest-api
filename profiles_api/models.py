@@ -13,15 +13,15 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
-    object = UserProfileManager()
+    objects = UserProfileManager()
 
-    # A string describing the name of the field on the user model that is used as the unique identifier
+    # A string describing the name of the field on the user model that is used as the unique identifier.
     USERNAME_FIELD = 'email'
 
-    # A string describing the name of the email field on the User model
+    # A string describing the name of the email field on the User model.
     EMAIL_FIELD = 'email'
 
-    # A list of the field names that will be prompted for when creating a user via the 'createsuperuser'
+    # A list of the field names that will be prompted for when creating a user via the 'createsuperuser'.
     REQUIRED_FIELDS = ['first_name', 'last_name']
 
     def __str__(self):
