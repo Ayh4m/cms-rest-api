@@ -20,7 +20,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         """Create and return a new user"""
 
         # We override this function to allow it to use the 'create_user' function of the objects manager
-        # instead of the default 'create' function of the objects manager which will not hash the password
+        # instead of the default 'create' function of the objects manager which won't hash the password
 
         user = models.UserProfile.objects.create_user(
             email=validated_data['email'],
@@ -30,3 +30,12 @@ class UserProfileSerializer(serializers.ModelSerializer):
         )
 
         return user
+
+
+class ProfileFeedItemSerializer(serializers.ModelSerializer):
+    """Serializes a profile feed item"""
+
+    class Meta:
+        model = models.ProfileFeedItem
+        fields = ['id', 'user_profile', 'status_text', 'created_on']
+        extra_kwargs = {'user_profile': {'read_only': True}}  # id and 'created_on' are 'read_only' by default
